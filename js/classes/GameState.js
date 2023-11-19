@@ -35,15 +35,6 @@ export class GameState {
 		this.updateBoard();
 	}
 
-	setPlayerTurn() {
-		if (!this.initialSetup) {
-			this.playerTurn = this.playerTurn === "X" ? "O" : "X";
-		}
-		const stateLabel = document.querySelector("[data-state-label]");
-		stateLabel.innerText = `${this.playerTurn}'s turn`;
-		console.log(`${this.playerTurn}'s turn`);
-	}
-
 	updateBoard() {
 		this.board = [];
 		const cells = document.querySelectorAll("[data-board-cell]");
@@ -110,6 +101,15 @@ export class GameState {
 		if (this.isGameOver) {
 			this.endGame();
 		}
+	}
+
+	setPlayerTurn() {
+		if (!this.initialSetup) {
+			this.playerTurn = this.playerTurn === "X" ? "O" : "X";
+		}
+		const stateLabel = document.querySelector("[data-state-label]");
+		stateLabel.innerText = `${this.playerTurn}'s turn`;
+		console.log(`${this.playerTurn}'s turn`);
 	}
 
 	endGame() {
