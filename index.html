@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tic-Tac-Toe | ellsworthjc</title>
+	<link rel="icon" href="https://ellsworthjc.netlify.app/assets/images/favicon.ico">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="index.js" type="module"></script>
+</head>
+<body class="bg-gray-900 text-white">
+	<section class="flex justify-center items-center h-screen w-screen flex-col gap-8">
+		<h1 class="text-5xl font-bold">Tic-Tac-Toe</h1>
+
+		<div data-board class="bg-gray-500 w-96 h-96 grid grid-cols-3 text-gray-800 font-black text-9xl select-none">
+			<div data-board-cell data-top-left class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-top-middle class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-top-right class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-middle-left class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-middle-middle class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-middle-right class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-bottom-left class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-bottom-middle class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+			<div data-board-cell data-bottom-right class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
+				<div data-o class="hidden">O</div>
+				<div data-x class="hidden">X</div>
+			</div>
+		</div>
+	</section>
+</body>
+</html>
