@@ -6,7 +6,6 @@
 export function displayX(cell) {
 	cell.querySelector("[data-x]").style.display = "block";
 	cell.querySelector("[data-o]").style.display = "none";
-	console.log("Cell made X");
 }
 
 /**
@@ -17,7 +16,6 @@ export function displayX(cell) {
 export function displayO(cell) {
 	cell.querySelector("[data-x]").style.display = "none";
 	cell.querySelector("[data-o]").style.display = "block";
-	console.log("Cell made O");
 }
 
 /**
@@ -28,6 +26,5 @@ export function displayO(cell) {
 export function displayEmpty(cell) {
 	cell.querySelector("[data-x]").style.display = "none";
 	cell.querySelector("[data-o]").style.display = "none";
-	console.log("Cell made empty");
 }
 
