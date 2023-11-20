@@ -5,42 +5,28 @@ export class GameState {
 	constructor(config) {
 		config = config ?? {};
 		this.playerTurn = config.playerTurn ?? "X";
-		this.board = config.board ?? [];
+		this.board = config.board ?? ["","","","","","","","","",];
 		this.isGameOver = config.isGameOver ?? false;
 		this.winner = config.winner ?? "";
 		this.initialSetup = true;
 	}
 
 	init() {
-		const cells = document.querySelectorAll("[data-board-cell]");
-		for (const cell of cells) {
-			display.displayEmpty(cell);
-			cell.addEventListener("click", () => this.takeTurn(cell));
-		}
+		display.refreshBoard(this.board);
+		this.resetListeners();
 		console.log("Game set up.");
 		this.setPlayerTurn();
 		this.initialSetup = false;
 	}
 
 	takeTurn(cell) {
-		this.fillCell(cell);
-	}
-
-	fillCell(cell) {
 		if (this.playerTurn === "X") {
-			display.displayX(cell);
+			this.board[cell] = "X";
 		} else {
-			display.displayO(cell);
+			this.board[cell] = "O";
 		}
-		this.updateBoard();
-	}
-
-	updateBoard() {
-		this.board = [];
-		const cells = document.querySelectorAll("[data-board-cell]");
-		for (const cell of cells) {
-			this.board.push(logic.getCellValue(cell));
-		}
+		display.refreshBoard(this.board);
+		this.resetListeners();
 		this.checkForGameEnd();
 	}
 
@@ -107,20 +93,24 @@ export class GameState {
 		if (!this.initialSetup) {
 			this.playerTurn = this.playerTurn === "X" ? "O" : "X";
 		}
-		const stateLabel = document.querySelector("[data-state-label]");
-		stateLabel.innerText = `${this.playerTurn}'s turn`;
+		display.updateStateLabel(`${this.playerTurn}'s turn`);
 		console.log(`${this.playerTurn}'s turn`);
 	}
 
 	endGame() {
-		const stateLabel = document.querySelector("[data-state-label]");
 		if (this.winner === "") {
-			stateLabel.innerText = "Draw";
-			console.log("Draw")
+			display.updateStateLabel("Draw");
+			console.log("Draw");
 		} else {
-			stateLabel.classList.add("animate-bounce");
-			stateLabel.innerText = `${this.winner} wins!`;
-			console.log(`${this.winner} wins!`)
+			display.updateStateLabel(`${this.winner} wins!`, "animate-bounce");
+			console.log(`${this.winner} wins!`);
 		}
+	}
+
+	resetListeners() {
+		const cells = document.querySelectorAll("[data-board-cell]");
+		for (const cell of cells) {
+			cell.addEventListener("click", () => this.takeTurn(cell.dataset.boardCell));
+		};
 	}
 }
