@@ -14,12 +14,17 @@ export function refreshBoard(board) {
 	main.innerHTML = boardHTML;
 }
 
+/**
+ *
+ * @param {Number} cellNumber
+ * @param {String} value
+ * @returns
+ */
 function createCell(cellNumber, value) {
 	return `
 		<div data-board-cell="${cellNumber}" data-middle-left class="flex justify-center items-center w-32 h-32 bg-gray-200 border-8 border-gray-900 hover:bg-gray-300 transition cursor-pointer">
 			<div>${value}</div>
 		</div>
-
 	`;
 }
 
@@ -34,37 +39,4 @@ export function updateStateLabel(text, ...classes) {
 	for (const styleClass of classes) {
 		stateLabel.classList.add(styleClass);
 	};
-}
-
-/**
- * Unused
- *
- * @param {HTMLElement} cell
- * @returns
- */
-export function displayX(cell) {
-	cell.querySelector("[data-x]").style.display = "block";
-	cell.querySelector("[data-o]").style.display = "none";
-}
-
-/**
- * Unused
- *
- * @param {HTMLElement} cell
- * @returns
- */
-export function displayO(cell) {
-	cell.querySelector("[data-x]").style.display = "none";
-	cell.querySelector("[data-o]").style.display = "block";
-}
-
-/**
- * Unused
- *
- * @param {HTMLElement} cell
- * @returns
- */
-export function displayEmpty(cell) {
-	cell.querySelector("[data-x]").style.display = "none";
-	cell.querySelector("[data-o]").style.display = "none";
 }

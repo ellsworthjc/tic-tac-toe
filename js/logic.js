@@ -1,57 +1,78 @@
 /**
  *
- * @param {HTMLElement} cell
+ * @param {Array} board
  * @returns
  */
-export function getCellValue(cell) {
-	const xCell = cell.querySelector("[data-x]");
-	const oCell = cell.querySelector("[data-o]");
-	if (xCell.style.display === "block" && oCell.style.display === "none") {
-		return "X";
-	} else if (xCell.style.display === "none" && oCell.style.display === "block") {
-		return "O";
-	} else if (xCell.style.display === "none" && oCell.style.display === "none") {
-		return "";
-	} else {
-		console.error("Invalid Board");
-		return "Invalid Board";
+export function checkForGameEnd(board) {
+	const scores = {
+		X: 1,
+		O: -1,
+		Draw: 0,
+	};
+
+	const result = {
+		winner: "",
+		value: "",
+	};
+
+	// top row
+	if (allEqualAndNotEmpty([board[0], board[1], board[2]])) {
+		result.winner = board[0];
+		result.value = scores[board[0]];
 	}
-}
-
-/**
- *
- * @param {HTMLElement} cell
- * @returns
- */
-export function isXCell(cell) {
-	return cell.querySelector("[data-x]").style.display === "block";
-}
-
-/**
- *
- * @param {HTMLElement} cell
- * @returns
- */
-export function isOCell(cell) {
-	return cell.querySelector("[data-o]").style.display === "block";
-}
-
-/**
- *
- * @param {HTMLElement} cell
- * @returns
- */
-export function isEmptyCell(cell) {
-	const xCell = cell.querySelector("[data-x]");
-	const oCell = cell.querySelector("[data-o]");
-	return xCell.style.display === "none" && oCell.style.display === "none";
+	// middle row
+	else if (allEqualAndNotEmpty([board[3], board[4], board[5]])) {
+		result.winner = board[3];
+		result.value = scores[board[3]];
+	}
+	// bottom row
+	else if (allEqualAndNotEmpty([board[6], board[7], board[8]])) {
+		result.winner = board[6];
+		result.value = scores[board[6]];
+	}
+	// left column
+	else if (allEqualAndNotEmpty([board[0], board[3], board[6]])) {
+		result.winner = board[0];
+		result.value = scores[board[0]];
+	}
+	// middle column
+	else if (allEqualAndNotEmpty([board[1], board[4], board[7]])) {
+		result.winner = board[1];
+		result.value = scores[board[1]];
+	}
+	// right column
+	else if (allEqualAndNotEmpty([board[2], board[5], board[8]])) {
+		result.winner = board[2];
+		result.value = scores[board[2]];
+	}
+	// top left to bottom right diagonal
+	else if (allEqualAndNotEmpty([board[0], board[4], board[8]])) {
+		result.winner = board[0];
+		result.value = scores[board[0]];
+	}
+	// bottom right to top left diagonal
+	else if (allEqualAndNotEmpty([board[6], board[4], board[2]])) {
+		result.winner = board[6];
+		result.value = scores[board[6]];
+	}
+	// game is a draw
+	else if (board.every(cell => cell != "")) {
+		result.winner = "Draw";
+		result.value = scores["Draw"];
+	}
+	// game continues
+	else {
+		console.log("No win yet...");
+		return false;
+	}
+	return result;
 }
 
 /**
  *
  * @param {Array} array
- * @returns
+ * @returns {Array}
  */
-export function allEqualAndNotEmpty(array) {
+function allEqualAndNotEmpty(array) {
 	return array.every(cell => cell != "" && cell === array[0]);
 }
