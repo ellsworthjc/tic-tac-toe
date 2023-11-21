@@ -27,6 +27,7 @@ export class GameState {
 		} else {
 			this.board[cell] = this.human;
 		}
+
 		display.refreshBoard(this.board);
 		this.resetListeners();
 
@@ -45,6 +46,7 @@ export class GameState {
 		} else {
 			this.initialSetup = false;
 		}
+
 		display.updateStateLabel(`${this.playerTurn}'s turn`);
 		console.log(`${this.playerTurn}'s turn`);
 
