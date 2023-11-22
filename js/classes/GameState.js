@@ -12,6 +12,10 @@ export class GameState {
 		this.ai = config.ai ?? "X";
 		this.human = this.ai === "X" ? "O" : "X";
 		this.playerTurn = "X";
+		this.players = {
+			maximizing: this.ai,
+			minimizing: this.human
+		};
 	}
 
 	init() {
@@ -51,7 +55,7 @@ export class GameState {
 		console.log(`${this.playerTurn}'s turn`);
 
 		if (this.playerTurn === this.ai) {
-			this.takeTurn(mm.takeAITurn(this.board));
+			this.takeTurn(mm.takeAITurn(this.board, this.players));
 		}
 	}
 
