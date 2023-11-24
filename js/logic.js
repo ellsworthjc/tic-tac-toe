@@ -5,8 +5,8 @@
  */
 export function checkForGameEnd(board) {
 	const scores = {
-		X: 1,
-		O: -1,
+		X: 10,
+		O: -10,
 		Draw: 0,
 	};
 

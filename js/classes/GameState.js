@@ -9,13 +9,13 @@ export class GameState {
 		this.isGameOver = config.isGameOver ?? false;
 		this.winner = config.winner ?? "";
 		this.initialSetup = true;
+		this.players = {
+			maximizing: "X",
+			minimizing: "O"
+		};
 		this.ai = config.ai ?? "X";
 		this.human = this.ai === "X" ? "O" : "X";
-		this.playerTurn = "X";
-		this.players = {
-			maximizing: this.ai,
-			minimizing: this.human
-		};
+		this.playerTurn = this.board.filter(cell => cell === "X").length === this.board.filter(cell => cell === "O").length ? "X" : "O";
 	}
 
 	init() {
@@ -26,6 +26,10 @@ export class GameState {
 	}
 
 	takeTurn(cell) {
+		if (this.board[cell] != "") {
+			console.log("Please choose an empty cell")
+			return;
+		}
 		if (this.playerTurn === this.ai) {
 			this.board[cell] = this.ai;
 		} else {
@@ -55,17 +59,19 @@ export class GameState {
 		console.log(`${this.playerTurn}'s turn`);
 
 		if (this.playerTurn === this.ai) {
-			this.takeTurn(mm.takeAITurn(this.board, this.players));
+			const move = mm.takeAITurn(this.board, this.players);
+			console.log(`%cAI taking turn at cell: ${move}`, "color: cyan;");
+			this.takeTurn(move);
 		}
 	}
 
 	endGame() {
 		if (this.winner === "Draw") {
 			display.updateStateLabel("Draw");
-			console.log("Draw");
+			console.log("Game Over: Draw");
 		} else {
 			display.updateStateLabel(`${this.winner} wins!`, "animate-bounce");
-			console.log(`${this.winner} wins!`);
+			console.log(`Game Over: ${this.winner} wins!`);
 		}
 	}
 
